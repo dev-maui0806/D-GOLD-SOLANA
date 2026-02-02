@@ -1,5 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useInViewAnimation } from '../hooks/useInViewAnimation';
+
+// Adjustable target date for countdown (day, month 1–12, year)
+const TARGET_DATE_DAY = 9;
+const TARGET_DATE_MONTH = 2; // February
+const TARGET_DATE_YEAR = 2026;
+const MONTH_NAMES = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+const TARGET_DATE_LABEL = `${TARGET_DATE_DAY} ${MONTH_NAMES[TARGET_DATE_MONTH - 1]}, ${TARGET_DATE_YEAR}`;
+const TARGET_LOCATION = 'SOLANA'; // placeholder: change to your location/event
 
 const AnimatedDot = ({ duration, delay, left, scale }) => {
   return (
@@ -18,9 +26,58 @@ const AnimatedDot = ({ duration, delay, left, scale }) => {
   );
 };
 
+const TimeBlock = ({ value, label }) => (
+  <div style={{ textAlign: 'center' }}>
+    <div
+      style={{
+        fontSize: 'clamp(1.25rem, 4vw, 1.875rem)',
+        fontWeight: '700',
+        color: 'rgb(255, 255, 255)',
+        fontVariantNumeric: 'tabular-nums',
+      }}
+    >
+      {String(value).padStart(2, '0')}
+    </div>
+    <div
+      style={{
+        fontSize: '12px',
+        color: 'rgb(163, 158, 143)',
+        textTransform: 'uppercase',
+        letterSpacing: '0.1em',
+        marginTop: '4px',
+      }}
+    >
+      {label}
+    </div>
+  </div>
+);
+
 export default function HeroSection() {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
   const { ref, isInView } = useInViewAnimation();
+
+  useEffect(() => {
+    const targetDate = new Date(TARGET_DATE_YEAR, TARGET_DATE_MONTH - 1, TARGET_DATE_DAY, 0, 0, 0).getTime();
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        });
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Generated with varied durations and delays for natural movement
   const dotConfigs = [
@@ -85,6 +142,51 @@ export default function HeroSection() {
 
         {/* Content */}
         <div className="relative z-20 max-w-4xl mx-auto px-4 text-center flex flex-col items-center w-full py-16 md:py-0">
+          {/* Countdown section (from inspo – at top) */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 'clamp(16px, 4vw, 32px)',
+                flexWrap: 'wrap',
+              }}
+            >
+              <TimeBlock value={timeLeft.days} label="Days" />
+              <span style={{ fontSize: 'clamp(1.25rem, 4vw, 1.5rem)', color: 'rgb(163, 158, 143)' }}>:</span>
+              <TimeBlock value={timeLeft.hours} label="Hours" />
+              <span style={{ fontSize: 'clamp(1.25rem, 4vw, 1.5rem)', color: 'rgb(163, 158, 143)' }}>:</span>
+              <TimeBlock value={timeLeft.minutes} label="Minutes" />
+              <span style={{ fontSize: 'clamp(1.25rem, 4vw, 1.5rem)', color: 'rgb(163, 158, 143)' }}>:</span>
+              <TimeBlock value={timeLeft.seconds} label="Seconds" />
+            </div>
+            <p
+              style={{
+                color: 'rgb(163, 158, 143)',
+                marginTop: '16px',
+                fontSize: '14px',
+              }}
+            >
+              Until launch — <span style={{ color: 'rgb(255, 191, 0)', fontWeight: '600' }}>Private Presale Live</span>
+            </p>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
+              <span
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '9999px',
+                  fontSize: '12px',
+                  color: 'rgb(163, 158, 143)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                  backdropFilter: 'blur(12px)',
+                }}
+              >
+                {TARGET_DATE_LABEL} | {TARGET_LOCATION}
+              </span>
+            </div>
+          </div>
+
           {/* Title */}
           <h1
             className="font-black text-transparent bg-clip-text mb-2 sm:mb-4"
@@ -123,7 +225,7 @@ export default function HeroSection() {
               href="https://pump.fun/coin/DMYNp65mub3i7LRpBdB66CgBAceLcQnv4gsWeCi6pump"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-[300px] px-4 sm:px-6 py-3 sm:py-4 font-bold text-black rounded transition-all duration-150 whitespace-nowrap text-sm sm:text-base"
+              className="w-full sm:w-[300px] px-4 sm:px-6 py-3 sm:py-4 font-bold text-white rounded transition-all duration-150 whitespace-nowrap text-sm sm:text-base"
               style={{
                 backgroundImage: 'linear-gradient(to right, rgb(255, 191, 0) 0%, oklch(0.666 0.179 58.318) 100%)',
                 boxShadow: isButtonHovered
@@ -134,7 +236,7 @@ export default function HeroSection() {
               onMouseEnter={() => setIsButtonHovered(true)}
               onMouseLeave={() => setIsButtonHovered(false)}
             >
-              BUY ON PUMP.FUN
+              Participate in Presale
             </a>
           </div>
         </div>

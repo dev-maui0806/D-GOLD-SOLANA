@@ -64,16 +64,16 @@ export default function Header() {
           backdropFilter: isScrolled ? 'blur(12px)' : 'none',
           backgroundColor: isScrolled ? 'oklab(0 0 0 / 0.8)' : 'rgb(13, 13, 13)',
           borderBottom: isScrolled ? '1px solid rgba(255, 191, 0, 0.2)' : 'none',
-          paddingTop: isScrolled ? '16px' : '24px',
-          paddingBottom: isScrolled ? '16px' : '24px',
+          paddingTop: isScrolled ? '11px' : '3px',
+          paddingBottom: isScrolled ? '11px' : '8px',
         }}
       >
         <div className="max-w-[1536px] mx-auto px-4 flex items-center justify-between">
           <div className="flex flex-col">
-            <span className="text-2xl font-bold text-yellow-400" style={{ fontFamily: 'Cinzel, serif', letterSpacing: '1.2px' }}>
+            <span className="font-bold text-yellow-400" style={{ fontFamily: 'Cinzel, serif', letterSpacing: '1.2px', fontSize: '1.35rem' }}>
               D-GOLD
             </span>
-            <span className="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider mt-0.5" style={{ letterSpacing: '1px' }}>
+            <span className="text-white uppercase tracking-wider mt-0.5" style={{ letterSpacing: '1px', fontSize: '9px' }}>
               Digital Gold on Solana
             </span>
           </div>
@@ -83,10 +83,11 @@ export default function Header() {
               <a
                 key={item}
                 href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                className="relative text-sm font-medium uppercase transition-all duration-150 text-[#ddd] hover:text-[#ffbf00] ! important group"
+                className="relative font-medium uppercase transition-all duration-150 text-[#ddd] hover:text-[#ffbf00] ! important group"
                 style={{
                   letterSpacing: '1.4px',
                   fontWeight: '500',
+                  fontSize: '12.6px',
                 }}
               >
                 {item}
@@ -102,12 +103,13 @@ export default function Header() {
               href="https://pump.fun/coin/DMYNp65mub3i7LRpBdB66CgBAceLcQnv4gsWeCi6pump"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2 text-black font-bold bg-[#ffbf00] hover:bg-[#f2590d] rounded transition-all duration-150"
+              className="px-6 py-2 text-white font-bold bg-[#ffbf00] hover:bg-[#f2590d] rounded-full transition-all duration-150"
               style={{
                 boxShadow: 'rgba(255, 215, 0, 0.3) 0px 0px 15px 0px',
+                fontSize: '12.6px',
               }}
             >
-              BUY NOW
+              Presale
             </a>
           </div>
 
@@ -155,8 +157,8 @@ export default function Header() {
                 className="text-center transition-all duration-150 text-[#ddd] hover:text-[#ffbf00]"
                 style={{
                   fontFamily: 'Cinzel, serif',
-                  fontSize: '18px',
-                  lineHeight: '28px',
+                  fontSize: '16.2px',
+                  lineHeight: '26px',
                   color: 'rgba(235, 232, 224, 0.8)',
                   padding: '8px 0',
                 }}
@@ -169,14 +171,15 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLinkClick}
-              className="text-center bg-[#fbbf00] hover:bg-[#f2590d] font-bold rounded transition-all duration-150"
+              className="text-center bg-[#fbbf00] hover:bg-[#f2590d] font-bold rounded-full transition-all duration-150"
               style={{
-                color: 'rgb(0, 0, 0)',
+                color: 'rgb(255, 255, 255)',
                 padding: '12px 16px',
                 marginTop: '8px',
+                fontSize: '14.4px',
               }}
             >
-              BUY NOW
+              Presale
             </a>
           </div>
         )}
