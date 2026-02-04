@@ -52,7 +52,7 @@ const TimeBlock = ({ value, label }) => (
   </div>
 );
 
-export default function HeroSection() {
+export default function HeroSection({ onOpenPresale }) {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -126,7 +126,7 @@ export default function HeroSection() {
       <section
         ref={ref}
         className={`relative flex items-center justify-center overflow-hidden pt-20 md:pt-0 ${isInView ? 'hero-animated' : ''}`}
-        style={{ minHeight: 'auto', minHeight: '100vh', backgroundColor: 'rgb(13, 13, 13)' }}
+        style={{ minHeight: '100vh', backgroundColor: 'rgb(13, 13, 13)' }}
       >
         {/* Background layer */}
         <div className="absolute inset-0 bg-black z-0"></div>
@@ -143,7 +143,7 @@ export default function HeroSection() {
         {/* Content */}
         <div className="relative z-20 max-w-4xl mx-auto px-4 text-center flex flex-col items-center w-full py-16 md:py-0">
           {/* Countdown section (from inspo – at top) */}
-          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '32px', marginTop: '-24px' }}>
             <div
               style={{
                 display: 'flex',
@@ -168,7 +168,7 @@ export default function HeroSection() {
                 fontSize: '14px',
               }}
             >
-              Until launch — <span style={{ color: 'rgb(255, 191, 0)', fontWeight: '600' }}>Private Presale Live</span>
+              Until Launch Date — <span style={{ color: 'rgb(255, 191, 0)', fontWeight: '600' }}>Private Presale Live</span>
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
               <span
@@ -191,7 +191,7 @@ export default function HeroSection() {
           <h1
             className="font-black text-transparent bg-clip-text mb-2 sm:mb-4"
             style={{
-              fontSize: 'clamp(2rem, 8vw, 8rem)',
+              fontSize: 'clamp(1.8rem, 7.2vw, 7.2rem)',
               backgroundImage: 'linear-gradient(to right in oklab, rgb(255, 215, 0) 0%, rgb(255, 140, 0) 50%, rgb(255, 215, 0) 100%)',
               fontFamily: 'Cinzel, serif',
               letterSpacing: 'clamp(-2.4px, -0.3vw, -4.8px)',
@@ -221,10 +221,9 @@ export default function HeroSection() {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center w-full px-2 sm:px-0">
-            <a
-              href="https://pump.fun/coin/DMYNp65mub3i7LRpBdB66CgBAceLcQnv4gsWeCi6pump"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => typeof onOpenPresale === 'function' && onOpenPresale()}
               className="w-full sm:w-[300px] px-4 sm:px-6 py-3 sm:py-4 font-bold text-white rounded transition-all duration-150 whitespace-nowrap text-sm sm:text-base"
               style={{
                 backgroundImage: 'linear-gradient(to right, rgb(255, 191, 0) 0%, oklch(0.666 0.179 58.318) 100%)',
@@ -237,7 +236,7 @@ export default function HeroSection() {
               onMouseLeave={() => setIsButtonHovered(false)}
             >
               Participate in Presale
-            </a>
+            </button>
           </div>
         </div>
 

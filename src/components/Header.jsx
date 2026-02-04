@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function Header() {
+export default function Header({ onOpenPresale }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -68,7 +68,7 @@ export default function Header() {
           paddingBottom: isScrolled ? '11px' : '8px',
         }}
       >
-        <div className="max-w-[1536px] mx-auto px-4 flex items-center justify-between">
+        <div className="2xl:max-w-[1536px] xl:max-w-[1254px] lg:max-w-[988px] md:max-w-[740px] sm:max-w-[480px] xs:max-w-[320px] mx-auto px-4 flex items-center justify-between">
           <div className="flex flex-col">
             <span className="font-bold text-yellow-400" style={{ fontFamily: 'Cinzel, serif', letterSpacing: '1.2px', fontSize: '1.35rem' }}>
               D-GOLD
@@ -99,10 +99,9 @@ export default function Header() {
                 ></span>
               </a>
             ))}
-            <a
-              href="https://pump.fun/coin/DMYNp65mub3i7LRpBdB66CgBAceLcQnv4gsWeCi6pump"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => typeof onOpenPresale === 'function' && onOpenPresale()}
               className="px-6 py-2 text-white font-bold bg-[#ffbf00] hover:bg-[#f2590d] rounded-full transition-all duration-150"
               style={{
                 boxShadow: 'rgba(255, 215, 0, 0.3) 0px 0px 15px 0px',
@@ -110,7 +109,7 @@ export default function Header() {
               }}
             >
               Presale
-            </a>
+            </button>
           </div>
 
           <button
@@ -166,12 +165,13 @@ export default function Header() {
                 {item}
               </a>
             ))}
-            <a
-              href="https://pump.fun/coin/DMYNp65mub3i7LRpBdB66CgBAceLcQnv4gsWeCi6pump"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleLinkClick}
-              className="text-center bg-[#fbbf00] hover:bg-[#f2590d] font-bold rounded-full transition-all duration-150"
+            <button
+              type="button"
+              onClick={() => {
+                if (typeof onOpenPresale === 'function') onOpenPresale();
+                handleLinkClick();
+              }}
+              className="text-center bg-[#fbbf00] hover:bg-[#f2590d] font-bold rounded-full transition-all duration-150 w-full"
               style={{
                 color: 'rgb(255, 255, 255)',
                 padding: '12px 16px',
@@ -180,7 +180,7 @@ export default function Header() {
               }}
             >
               Presale
-            </a>
+            </button>
           </div>
         )}
       </nav>

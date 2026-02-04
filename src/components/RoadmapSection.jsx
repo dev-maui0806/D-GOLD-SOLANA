@@ -46,7 +46,7 @@ export default function RoadmapSection() {
       `}</style>
       <section
         ref={ref}
-        className={`${isInView ? 'roadmap-animated' : ''}`}
+        className={`${isInView ? 'roadmap-animated w-full ' : ''}`}
         id="roadmap"
         style={{
           backgroundColor: 'rgb(10, 10, 10)',
@@ -55,10 +55,11 @@ export default function RoadmapSection() {
         }}
       >
         <div
+        className="2xl:max-w-[1536px] xl:max-w-[1254px] lg:max-w-[982
+          px] md:max-w-[740px] sm:max-w-[480px] xs:max-w-[320px] mx-auto px-4 relative z-10 w-full"
           style={{
             marginLeft: 'auto',
             marginRight: 'auto',
-            maxWidth: '1536px',
             paddingLeft: '16px',
             paddingRight: '16px',
             width: '100%',

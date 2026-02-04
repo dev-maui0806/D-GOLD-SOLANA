@@ -49,7 +49,7 @@ export default function LegendSection() {
           position: 'relative',
         }}
       >
-        <div className="max-w-[1536px] mx-auto px-4 relative z-10 w-full">
+        <div className="2xl:max-w-[1536px] xl:max-w-[1254px] lg:max-w-[988px] md:max-w-[740px] sm:max-w-[480px] xs:max-w-[320px] mx-auto px-4 relative z-10 w-full">
           <div
             style={{
               display: 'grid',
